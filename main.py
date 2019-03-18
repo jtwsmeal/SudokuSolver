@@ -424,7 +424,9 @@ def get_sudoku_grid(mean_vert_lines, mean_horiz_lines, src_img):
 
 			# Note:  You can use model.predict_proba() to obtain the class probabilities.
 			predictions = model.predict(digit_imgs)
-			pred_nums = predictions.argmax(axis=1)
+
+			# Add 1 to the predictions because the targets are between 0 and 8.
+			pred_nums = predictions.argmax(axis=1) + 1
 			for pred_index, (i, j) in enumerate(digit_locations):
 				sudoku_grid[i][j] = pred_nums[pred_index]
 
